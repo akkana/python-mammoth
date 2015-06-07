@@ -1,6 +1,6 @@
-from . import docx, conversion, options, documents, images, underline
+from . import docx, conversion, options, documents, images, underline, strike
 
-__all__ = ["convert_to_html", "extract_raw_text", "images", "underline"]
+__all__ = ["convert_to_html", "extract_raw_text", "images", "underline", "strike"]
 
 
 def convert_to_html(*args, **kwargs):

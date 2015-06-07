@@ -79,6 +79,7 @@ def _create_reader(numbering, content_types, relationships, styles, note_element
         is_bold = properties.find_child("w:b")
         is_italic = properties.find_child("w:i")
         is_underline = properties.find_child("w:u")
+        is_strike = properties.find_child("w:strike")
         
         return _read_xml_elements(element.children) \
             .map(lambda children: documents.run(
@@ -88,6 +89,7 @@ def _create_reader(numbering, content_types, relationships, styles, note_element
                 is_bold=is_bold,
                 is_italic=is_italic,
                 is_underline=is_underline,
+                is_strike=is_strike,
                 vertical_alignment=vertical_alignment,
             ))
 

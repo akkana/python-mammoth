@@ -13,6 +13,7 @@ def convert_document_element_to_html(element,
         style_map=None,
         convert_image=None,
         convert_underline=None,
+        convert_strike=None,
         id_prefix=None,
         output_format=None,
         ignore_empty_paragraphs=True):
@@ -27,6 +28,7 @@ def convert_document_element_to_html(element,
     converter = DocumentConverter(style_map,
         convert_image=convert_image,
         convert_underline=convert_underline,
+        convert_strike=convert_strike,
         id_prefix=id_prefix,
         ignore_empty_paragraphs=ignore_empty_paragraphs)
     converter.convert_element_to_html(element, html_generator,)
@@ -35,7 +37,7 @@ def convert_document_element_to_html(element,
 
 
 class DocumentConverter(object):
-    def __init__(self, style_map, convert_image, convert_underline, id_prefix, ignore_empty_paragraphs):
+    def __init__(self, style_map, convert_image, convert_underline, convert_strike, id_prefix, ignore_empty_paragraphs):
         self.messages = []
         self._style_map = style_map
         self._id_prefix = id_prefix
@@ -58,6 +60,7 @@ class DocumentConverter(object):
             documents.Note: self._convert_note,
         }
         self._convert_underline = convert_underline
+        self._convert_strike = convert_strike
 
 
     def convert_element_to_html(self, element, html_generator):
@@ -99,6 +102,8 @@ class DocumentConverter(object):
             run_generator.start("sub")
         if run.is_underline and self._convert_underline is not None:
             self._convert_underline(run_generator)
+        if run.is_strike and self._convert_strike is not None:
+            self._convert_strike(run_generator)
         self._convert_elements_to_html(run.children, run_generator)
         run_generator.end_all()
         html_generator.append(run_generator)

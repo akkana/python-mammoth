@@ -32,6 +32,8 @@ def main():
             docx_fileobj,
             style_map=style_map,
             convert_image=convert_image,
+            convert_underline=mammoth.underline.element('em class="underline"'),
+            convert_strike=mammoth.strike.element('em class="strike"'),
             output_format=args.output_format,
         )
         for message in result.messages:
