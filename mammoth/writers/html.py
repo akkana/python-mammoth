@@ -13,9 +13,13 @@ class HtmlWriter(object):
     def start(self, name, attributes=None):
         attribute_string = _generate_attribute_string(attributes)
         self._fragments.append("<{0}{1}>".format(name, attribute_string))
+        if name == 'p':
+            self._fragments.append("\n")
 
     def end(self, name):
         self._fragments.append("</{0}>".format(name))
+        if name == 'p':
+            self._fragments.append("\n")
     
     def self_closing(self, name, attributes=None):
         attribute_string = _generate_attribute_string(attributes)
